@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard - Delicious Dine</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { 
+    background-color: #121212; 
+    color: #f8f9fa; 
+    font-family: 'Poppins', sans-serif; 
+    min-height: 100vh;
+}
+.navbar { 
+    background: rgba(0,0,0,0.85); 
+    backdrop-filter: blur(10px); 
+}
+.navbar-brand { 
+    font-weight: 700; 
+    font-size: 1.8rem; 
+    background: linear-gradient(45deg,#f8d34f,#ff6f61,#6a0dad); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    text-shadow: 0 0 10px rgba(248,211,79,0.7);
+}
+
+.container h3 { 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg,#f8d34f,#ff6f61);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.card {
+    background: #1f1f1f;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(248,211,79,0.2);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #f8d34f;
+}
+
+.card-title {
+    color: #f8d34f;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card-text {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.card-buttons button {
+    flex: 1;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.card-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+.add-recipe-card {
+    background: linear-gradient(160deg,#1b1b1b,#2a2a2a);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(248,211,79,0.2);
+    margin-bottom: 40px;
+}
+
+.add-recipe-card input,
+.add-recipe-card select {
+    background: #121212;
+    border: 1px solid #f8d34f;
+    color: #f8d34f;
+    border-radius: 8px;
+}
+
+.add-recipe-card input::placeholder,
+.add-recipe-card select {
+    color: #f8d34f;
+    opacity: 0.8;
+}
+
+.add-recipe-card button {
+    background: linear-gradient(90deg,#f8d34f,#ff7f50);
+    border:none;
+    color:#000;
+    font-weight:600;
+    padding:10px 20px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.add-recipe-card button:hover {
+    background: linear-gradient(90deg,#ff7f50,#f8d34f);
+    transform: translateY(-2px);
+}
+ .navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #f8d34f, #ff6f61, #6a0dad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(248, 211, 79, 0.7),
+               0 0 20px rgba(255, 111, 97, 0.5);
+}
+.navbar-brand:hover {
+  transform: scale(1.08);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+               0 0 30px rgba(255, 111, 97, 0.6);
+}
+.navbar .btn-outline-light {
+  color: #f8d34f;
+  border-color: #f8d34f;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.navbar .btn-outline-light:hover {
+  background: linear-gradient(45deg, #f8d34f, #ff6f61);
+  color: #121212;
+  border-color: transparent;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+  <a class="navbar-brand" href="#">🍽️ Admin Dashboard</a>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-light btn-sm" onclick="goToHome()">Go to Website</button>
+    <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+  </div>
+</div>
+</nav>
+<br><br>
+<div class="container py-5" style="padding-top:120px;">
+  <h3>Manage Recipes</h3>
+
+  <!-- Add Recipe Form -->
+  <div class="add-recipe-card">
+    <h5 class="mb-3">Add New Recipe</h5>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <input id="recipeName" class="form-control" placeholder="Recipe Name" />
+      </div>
+      <div class="col-md-2">
+        <input id="recipePrice" class="form-control" type="number" placeholder="Price ₹" />
+      </div>
+      <div class="col-md-3">
+        <input id="recipeImg" class="form-control" placeholder="Image URL" />
+      </div>
+      <div class="col-md-3">
+        <input id="recipeDesc" class="form-control" placeholder="Short Description" />
+      </div>
+      <div class="col-md-1">
+        <select id="recipeCategory" class="form-select">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+        </select>
+      </div>
+    </div>
+    <button class="mt-3" onclick="addRecipe()">Add Recipe</button>
+  </div>
+
+  <!-- Recipe List -->
+  <div id="recipeContainer" class="row g-3"></div>
+</div>
+
+<script>
+// Admin protection
+const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+if (!currentUser || currentUser.role !== 'admin') {
+  alert("Access denied. Admins only.");
+  window.location.href = "login.html";
+}
+
+let recipes = JSON.parse(localStorage.getItem('recipes') || '[]');
+const container = document.getElementById('recipeContainer');
+
+function renderRecipes() {
+  container.innerHTML = '';
+  if (!recipes.length) {
+    container.innerHTML = '<p class="text-muted">No recipes added yet.</p>';
+    return;
+  }
+  recipes.forEach((r,index)=>{
+    const col = document.createElement('div');
+    col.className = 'col-md-3';
+    col.innerHTML = `
+      <div class="recipe-card" data-index="${index}">
+        <img src="${r.img}" alt="${r.name}">
+        <h6 class="card-title">${r.name}</h6>
+        <p class="card-text">₹${r.price}<br>${r.desc}</p>
+        <p class="text-muted small">Category: ${r.category}</p>
+        <div class="card-buttons">
+          <button class="btn btn-sm btn-warning" onclick="editRecipe(${index})">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteRecipe(${index})">Delete</button>
+        </div>
+      </div>`;
+    container.appendChild(col);
+  });
+}
+
+renderRecipes();
+
+function addRecipe() {
+  const name = document.getElementById('recipeName').value.trim();
+  const price = document.getElementById('recipePrice').value;
+  const img = document.getElementById('recipeImg').value.trim();
+  const desc = document.getElementById('recipeDesc').value.trim();
+  const category = document.getElementById('recipeCategory').value;
+  if(!name||!price||!img||!desc){ alert("Please fill all fields!"); return; }
+  recipes.push({ name, price, img, desc, category });
+  localStorage.setItem('recipes', JSON.stringify(recipes));
+  renderRecipes();
+  clearForm();
+}
+
+function clearForm() {
+  document.getElementById('recipeName').value='';
+  document.getElementById('recipePrice').value='';
+  document.getElementById('recipeImg').value='';
+  document.getElementById('recipeDesc').value='';
+}
+
+function deleteRecipe(index) {
+  if(confirm("Delete this recipe?")){
+    recipes.splice(index,1);
+    localStorage.setItem('recipes',JSON.stringify(recipes));
+    renderRecipes();
+  }
+}
+
+function editRecipe(index) {
+  const r=recipes[index];
+  const newName=prompt("Edit Name:",r.name); if(newName===null)return;
+  const newPrice=prompt("Edit Price:",r.price); if(newPrice===null)return;
+  const newImg=prompt("Edit Image URL:",r.img); if(newImg===null)return;
+  const newDesc=prompt("Edit Description:",r.desc); if(newDesc===null)return;
+  const newCategory=prompt("Edit Category (breakfast/lunch/dinner):",r.category); if(newCategory===null)return;
+  recipes[index]={ name:newName, price:newPrice, img:newImg, desc:newDesc, category:newCategory };
+  localStorage.setItem('recipes',JSON.stringify(recipes));
+  renderRecipes();
+}
+
+function goToHome(){ window.location.href="index.html"; }
+function logout(){ localStorage.removeItem('currentUser'); window.location.href="login.html"; }
+</script>
+
+</body>
+</html>
